@@ -1,3 +1,5 @@
-/*
-Future styling to go here
-*/
+body {
+    margin: 0px;
+    background-color: rgb(56,220, 250);
+    overflow: hidden;
+}
