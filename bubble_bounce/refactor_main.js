@@ -24,7 +24,7 @@ const BounceBalls = function(c, cw, ch) {
 
     //Function to generate random colors for animation elements
     function randoColor() {
-        let rcol = () => Math.rouns(Math.random() * 250);
+        let rcol = () => Math.round(Math.random() * 250);
         let rtran = () => Math.ceil(Math.random() * 10) / 10;
         return (
             `rgba(${rcol()}, ${rcol()}, ${rcol()}, ${rtran()})`
