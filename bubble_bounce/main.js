@@ -15,7 +15,7 @@ const grav = 0.99;
 //Define mouse position and set listener
 let mouseX = 0;
 let mouseY = 0;
-addEventListener("mousemove", function() {
+document.addEventListener("mousemove", function(event) {
     mouseX = event.clientX;
     mouseY = event.clientY;
 });
@@ -92,8 +92,8 @@ function animate() {
                 //ballList[i].x += 1;
                 ballList[i].radius += 5;
             } else {
-                if ( ballList[i].radius > ballList[i].startradius) {
-                    ballList[i].radius += 5;
+                if (ballList[i].radius > ballList[i].startradius) {
+                    ballList[i].radius += -5;
                 }
             }
     } //for loop end
