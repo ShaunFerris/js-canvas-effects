@@ -44,7 +44,7 @@ function Ball() {
     //Define method to update position
     this.update = function() {
         c.beginPath();
-        c.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+        c.arc(this.x, this.y, this.radius, 0, (2 * Math.PI));
         c.fillStyle = this.color;
         c.fill();
         //c.stroke();
@@ -54,7 +54,8 @@ function Ball() {
 //Function to generate random ball objects
 function getBallList(n) {
     return Array(n)
-        .fill(new Ball());
+        .fill(0)
+        .map(x => new Ball());
 }
 
 function animate() {
@@ -91,10 +92,8 @@ function animate() {
             ballList[i].radius < 70) {
                 //ballList[i].x += 1;
                 ballList[i].radius += 5;
-            } else {
-                if (ballList[i].radius > ballList[i].startradius) {
-                    ballList[i].radius += -5;
-                }
+            } else if (ballList[i].radius > ballList[i].startradius) {
+                ballList[i].radius -= 5;
             }
     } //for loop end
 } //Animation end
