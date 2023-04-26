@@ -34,7 +34,7 @@ function Ball() {
     //Init color, radius, position, heading and velocity to random
     this.color = randoColor();
     this.radius = Math.random() * 20 + 14;
-    this.startRadius = this.radius;
+    this.startradius = this.radius;
     this.x = Math.random() * (termx - this.radius * 2) + this.radius;
     this.y = Math.random() * (termy - this.radius);
     this.dy = Math.random() * 2;
