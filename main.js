@@ -18,9 +18,10 @@ addEventListener("mousemove", function() {
     mouseY = event.clientY;
 });
 
-function randColor() {
+function randoColor() {
+    let rcol = () => Math.round(Math.random() * 250);
+    let rtran = () => Math.ceil(Math.random() * 10) / 10;
     return (
-        "rgba(" +
-        Math.round(Math.random() * 250)
-    )
+        `rgba(${rcol()}, ${rcol()}, ${rcol()}, ${rtran()})`
+    );
 }
