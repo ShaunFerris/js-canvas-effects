@@ -5,8 +5,8 @@ const canvas = document.getElementById('myCanvas');
 const c = canvas.getContext('2d');
 let termx = window.innerWidth;
 let termy = window.innerHeight;
-canvas.width = tx;
-canvas.height = ty;
+canvas.width = termx;
+canvas.height = termy;
 //c.lineWidth = 5;
 //c.globalAlpha = 0.5;
 c.strokeWidth = 5;
@@ -51,11 +51,58 @@ function Ball() {
     };
 }
 
-let test = new Ball();
-console.log(test);
-
 //Function to generate random ball objects
 function getBallList(n) {
     return Array(n)
         .fill(new Ball());
 }
+
+function animate() {
+    //Check the terminal dimensions update if neccessary
+    if (termx != window.innerWidth || termy != window.innerHeight) {
+        termx = window.innerWidth;
+        termy = window.innerHeight;
+        canvas.width = termx;
+        canvas.width = termy;
+    }
+
+    //Get animation frame
+    requestAnimationFrame(animate);
+    c.clearRect(0, 0, termx, termy);
+
+    //Main animation loop
+    for (let i = 0; i < ballList.length; i++) {
+        ballList[i].update();
+        ballList[i].y += ballList[i].dy;
+        ballList[i].x += ballList[i].dx;
+        if (ballList[i].y + ballList[i].radius >= termy) {
+            ballList[i].dy = -ballList[i].dy * grav;
+        } else {
+            ballList[i].dy += ballList[i].velocity;
+        }
+        if (ballList[i].x + ballList[i].radius > termx ||
+            ballList[i].x - ballList[i].radius < 0) {
+                ballList[i].dx = -ballList[i].dx;
+        }
+        if (mouseX > ballList[i].x - 20 &&
+            mouseX < ballList[i].x + 20 &&
+            mouseY > ballList[i].y - 50 &&
+            mouseY < ballList[i].y + 50 &&
+            ballList[i].radius < 70) {
+                //ballList[i].x += 1;
+                ballList[i].radius += 5;
+            } else {
+                if ( ballList[i].radius > ballList[i].startradius) {
+                    ballList[i].radius += 5;
+                }
+            }
+    } //for loop end
+} //Animation end
+
+const ballList = getBallList(50);
+animate();
+
+setInterval(function() {
+    ballList.push(new Ball());
+    ballList.splice(0, 1);
+}, 400);
