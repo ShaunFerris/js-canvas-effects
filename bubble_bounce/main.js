@@ -7,8 +7,8 @@ let termx = window.innerWidth;
 let termy = window.innerHeight;
 canvas.width = termx;
 canvas.height = termy;
-//c.lineWidth = 5;
-//c.globalAlpha = 0.5;
+//c.lineWidth = 5;//comment on and off for effect
+c.globalAlpha = 0.5;//comment on and off for effect
 c.strokeWidth = 5;
 const grav = 0.99;
 
@@ -47,7 +47,7 @@ function Ball() {
         c.arc(this.x, this.y, this.radius, 0, (2 * Math.PI));
         c.fillStyle = this.color;
         c.fill();
-        //c.stroke();
+        c.stroke();//comment on and off for effect
     };
 }
 
@@ -90,8 +90,8 @@ function animate() {
             mouseY > ballList[i].y - 50 &&
             mouseY < ballList[i].y + 50 &&
             ballList[i].radius < 70) {
-                //ballList[i].x += 1;
-                ballList[i].radius += 5;
+                ballList[i].x += 10;//comment on and off for effect
+                //ballList[i].radius += 5;//comment on and off for effect
             } else if (ballList[i].radius > ballList[i].startradius) {
                 ballList[i].radius -= 5;
             }
