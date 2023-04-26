@@ -7,24 +7,20 @@ canvas.height = window.innerHeight;
 const c = canvas.getContext('2d');
 //c.lineWidth = 5;
 //c.globalAlpha = 0.5;
+c.strokeWidth = 5;
+const grav = 0.99;
 
-// Define any variables or constants needed for your animations
-let x = 0;
-let y = 0;
+// Define mouse position and set listener
+let mouseX = 0;
+let mouseY = 0;
+addEventListener("mousemove", function() {
+    mouseX = event.clientX;
+    mouseY = event.clientY;
+});
 
-// Define functions for drawing and animating your graphics
-function draw() {
-	// Add code here to draw your graphics on the canvas
-	ctx.fillRect(x, y, 50, 50);
+function randColor() {
+    return (
+        "rgba(" +
+        Math.round(Math.random() * 250)
+    )
 }
-
-function animate() {
-	// Add code here to update the position of your graphics and trigger new frames
-	x++;
-	y++;
-	requestAnimationFrame(animate);
-}
-
-// Call your animation functions to start the animation loop
-draw();
-animate();
