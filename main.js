@@ -4,7 +4,9 @@ const canvas = document.getElementById('myCanvas');
 // Set the canvas dimensions and get the 2D drawing context
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
-const ctx = canvas.getContext('2d');
+const c = canvas.getContext('2d');
+//c.lineWidth = 5;
+//c.globalAlpha = 0.5;
 
 // Define any variables or constants needed for your animations
 let x = 0;
