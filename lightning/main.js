@@ -10,12 +10,12 @@ function setupCanvas() {
     with the variable names.
     */
     const canvas = document.getElementById('myCanvas');
-    const c = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d');
     let termx = window.innerWidth;
     let termy = window.innerHeight;
     canvas.width = termx;
     canvas.height = termy;
-    return {c, termx, termy}
+    return {ctx, termx, termy};
 }
 
 class canvasLightning {
@@ -23,7 +23,15 @@ class canvasLightning {
     Class to contain animation functions and properties. Initialized
     with the canvas properties from setupCanvas().
     */
-    constructor(c, termx, termy) {
+    constructor({ctx, termx, termy}) {
+        this.ctx = ctx;
+        this.termx = termx;
+        this.termy = termy;
 
     }
 }
+
+canvas = setupCanvas();
+console.log(canvas);
+const testCan = new canvasLightning(canvas);
+console.log(testCan.termx);
