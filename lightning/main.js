@@ -51,6 +51,32 @@ class canvasLightning {
     /*
     End utility function definitions
     */
+    
+    createBolt(x, y, canSpawn) {
+        /*
+        Creates an object representing a bolt of lightning and pushes
+        it to the lightning instance property.
+
+        Takes an x and y coordinate and spawnflag boolean, returns an
+        object that maps the path of a bolt with randomly generated
+        range and path limit.
+        */
+        this.lightning.push({
+            x: x,
+            y: y,
+            xrange: this.rand(5, 30),
+            yrange: this.rand(5, 25),
+            path: [{
+                x: x,
+                y: y
+            }],
+            pathLimit: this.rand(10, 35),
+            canSpawn: canSpawn,
+            hasFired: false
+        });
+    }
+
+    
 }
 
 canvas = setupCanvas();
