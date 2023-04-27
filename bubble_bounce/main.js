@@ -34,7 +34,7 @@ function Ball() {
     //Init color, radius, position, heading and velocity to random
     this.color = randoColor();
     this.radius = Math.random() * 20 + 14;
-    this.startradius = this.radius;
+    this.startRadius = this.radius;
     this.x = Math.random() * (termx - this.radius * 2) + this.radius;
     this.y = Math.random() * (termy - this.radius);
     this.dy = Math.random() * 2;
@@ -47,7 +47,7 @@ function Ball() {
         c.arc(this.x, this.y, this.radius, 0, (2 * Math.PI));
         c.fillStyle = this.color;
         c.fill();
-        c.stroke();//comment on and off for effect
+        //c.stroke();//comment on and off for effect
     };
 }
 
@@ -90,9 +90,10 @@ function animate() {
             mouseY > ballList[i].y - 50 &&
             mouseY < ballList[i].y + 50 &&
             ballList[i].radius < 70) {
-                ballList[i].x += 10;//comment on and off for effect
-                //ballList[i].radius += 5;//comment on and off for effect
-            } else if (ballList[i].radius > ballList[i].startradius) {
+                //Both if these conditions alter the mouseover effect
+                //ballList[i].x += 10;//comment on and off for effect
+                ballList[i].radius += 5;//comment on and off for effect
+            } else if (ballList[i].radius > ballList[i].startRadius) {
                 ballList[i].radius -= 5;
             }
     } //for loop end
