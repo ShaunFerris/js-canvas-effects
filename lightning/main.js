@@ -76,7 +76,57 @@ class canvasLightning {
         });
     }
 
-    
+    updateBolt() {
+        let i = this.lightning.length;
+        while (i--) {
+            let light = this.lightning[i];
+
+            light.path.push({
+                x: light.path[light.path.length-1].x +
+                    this.rand(0, light.xrange/2),
+                y: light.path[light.path.length-1] +
+                    this.rand(0, light.yrange)
+            });
+
+            if (light.path.length > light.pathLimit) {
+                this.lightning.splice(i, 1);
+            }
+            light.hasFired = true;
+        }
+    }
+
+    renderBolt() {
+        let i = this.lightning.length;
+        while(i--) {
+            let light = this.lightning[i];
+            this.ctx.strokeStyle = 
+                `hsla(0, 100%, 100%, (${this.rand(10, 100)/100})`;
+            this.ctx.lineWidth = 1;
+
+            for (let i = 30; i < 151; i += 30) {
+                if (this.rand(0, i) === 0) {
+                    this.ctx.lineWidth += 1; 
+                }
+            }
+            this.ctx.beginPath();
+
+            let pathCount = light.path.length;
+            this.ctx.moveTo(light.x, light.y);
+            for (let pc = 0; pc < pathCount; pc++) {
+                this.ctx.lineTo(light.path[pc].x, light.path[pc].y);
+                
+                if (light.canSpawn && this.rand(0, 100) === 0) {
+                    light.canSpawn = false;
+                    this.createBolt(
+                        light.path[pc].x, light.path[pc].y, false
+                    );
+                }
+            }
+            if (!light.hasFired) {
+                
+            }
+        }
+    }
 }
 
 canvas = setupCanvas();
