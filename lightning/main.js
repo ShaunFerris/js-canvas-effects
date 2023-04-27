@@ -28,7 +28,29 @@ class canvasLightning {
         this.termx = termx;
         this.termy = termy;
 
+        this.lightning = [];
+        this.currLightTime = 0;
+        this.totalLightTime = 50;
     }
+
+    /*
+    Define utility functions for use in the other methods
+    */
+    rand(randmin, randmax) {
+        return ~~(
+            Math.random() * (randmax - randmin + 1) + randmin
+        );
+    }
+
+    hitTest(x1, y1, w1, h1, x2, y2, w2, h2) {
+        return !(
+            x1 + w1 < x2 || x2 + w2 < x1 ||
+            y1 + h1 < y2 || y2 + h2 < y1
+        );
+    }
+    /*
+    End utility function definitions
+    */
 }
 
 canvas = setupCanvas();
