@@ -35,9 +35,12 @@ class Fractal {
         this.minSize = 10;
         this.angleDiff = Math.PI/6;
         this.strokeLen = 2;
+        this.counter = 0;
         this.ctx.fillStyle = "#FF057A";
         this.ctx.fillRect(0, 0, this.termx, this.termy);
         this.ctx.strokeStyle = 'white';
+
+        this.animate();
     }
 
     drawTree(size, x, y, angle, minSize, strokeLen, level) {
@@ -54,14 +57,65 @@ class Fractal {
         this.ctx.restore();
 
         if (size > minSize) {
+            /*
+            Grow the left and right branches if size is above the 
+            minimum. The blocks for the left and right branches are
+            identical except one adds the angle dif to the current
+            angle and the other subtracts it.
+            */
             //Recur itself on the right branch
             if (Math.random() > 0.1 || level < 1) {
                 this.drawTree(
                     size = 3 * size / 4,
                     x = x + size * Math.sin(angle),
-                    y = 
-                )
+                    y = y - size * Math.cos(angle),
+                    angle = angle + this.angleDiff, 
+                    minSize = minSize,
+                    strokeLen = strokeLen * 0.99,
+                    level = level + 1
+                );
+            }
+            //Recur itself on the left branch
+            if (Math.random() > 0.1 || level < 1) {
+                this.drawTree(
+                    size = 3 * size / 4,
+                    x = x + size * Math.sin(angle),
+                    y = y - size * Math.cos(angle),
+                    angle = angle - this.angleDiff,
+                    minSize = minSize,
+                    strokeLen = strokeLen * 0.99,
+                    level = level + 1
+                );
             }
         }
+        console.log("Drawing");
     }
+
+    animate = () => {
+        /*
+        Main animation loop. Written as an arrow function so that it
+        uses the global scope and can access the Fractal instances this
+        variable.
+        */
+        if (this.counter % 20 === 0) {
+            this.ctx.clearRect(0, 0, this.termx, this.termy);
+            this.ctx.fillRect(0, 0, this.termx, this.termy);
+            this.drawTree(
+                this.termy / 4,
+                this.termx / 2,
+                this.termy,
+                0,
+                this.minSize,
+                this.strokeLen,
+                0
+            );
+            this.counter = 1;
+        }
+        this.counter++;
+        window.requestAnimationFrame(this.animate);
+    }
+    
 }
+
+const can = setupCanvas();
+const fract = new Fractal(can);
