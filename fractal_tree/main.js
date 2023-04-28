@@ -66,25 +66,25 @@ class Fractal {
             //Recur itself on the right branch
             if (Math.random() > 0.1 || level < 1) {
                 this.drawTree(
-                    size = 3 * size / 4,
-                    x = x + size * Math.sin(angle),
-                    y = y - size * Math.cos(angle),
-                    angle = angle + this.angleDiff, 
-                    minSize = minSize,
-                    strokeLen = strokeLen * 0.99,
-                    level = level + 1
+                    3 * size / 4,
+                    x + size * Math.sin(angle),
+                    y - size * Math.cos(angle),
+                    angle + this.angleDiff, 
+                    minSize,
+                    strokeLen * 0.99,
+                    level + 1
                 );
             }
             //Recur itself on the left branch
             if (Math.random() > 0.1 || level < 1) {
                 this.drawTree(
-                    size = 3 * size / 4,
-                    x = x + size * Math.sin(angle),
-                    y = y - size * Math.cos(angle),
-                    angle = angle - this.angleDiff,
-                    minSize = minSize,
-                    strokeLen = strokeLen * 0.99,
-                    level = level + 1
+                    3 * size / 4,
+                    x + size * Math.sin(angle),
+                    y - size * Math.cos(angle),
+                    angle - this.angleDiff,
+                    minSize,
+                    strokeLen * 0.99,
+                    level + 1
                 );
             }
         }
