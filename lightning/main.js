@@ -77,6 +77,12 @@ class canvasLightning {
     }
 
     updateBolt() {
+        /*
+        Loops through every bolt in the lightning instance variable
+        and pushes new, randomly generated point to the bolts path
+        array. Removes previous path points if pathlimit is exceeded,
+        and sets the has fired flag to true.
+        */
         let i = this.lightning.length;
         while (i--) {
             let light = this.lightning[i];
