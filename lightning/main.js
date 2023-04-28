@@ -153,7 +153,31 @@ class canvasLightning {
     }
 
     boltTimer() {
+        /*
+        Function that increments the currLightTime instance variable
+        and checks if it exceeds the totalLightTime variable. 
+        
+        On true: A random number of new bolts iare created with random
+        x and y coords, currLightTime is reset to 0, and totalLightTime
+        is reset to a random value between 30 and 100.
 
+        On false: No action is taken.
+        */
+        this.currLightTime++;
+        if (this.currLightTime >= this.totalLightTime) {
+            let newx = this.rand(100, termx - 100);
+            let newy = this.rand(0, termy / 2);
+            let createCount = this.rand(1, 3);
+            while (createCount--) {
+                this.createBolt(newx, newy, true);
+            }
+            this.currLightTime = 0;
+            this.totalLightTime = this.rand(30, 100);
+        }
+    }
+
+    clearCanvas() {
+        
     }
 }
 
