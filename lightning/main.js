@@ -204,3 +204,15 @@ class canvasLightning {
 
 const can = setupCanvas();
 const renderer = new canvasLightning(can);
+
+/*
+TO BE ADDED:
+Adapt below function to an event listener that triggers on 
+window resize.
+Use this syntax: addEventListener("resize", (event) => {});
+
+    $(window).on('resize', function(){
+      _this.cw = _this.c.width = window.innerWidth;
+      _this.ch = _this.c.height = window.innerHeight;  
+    });
+*/
