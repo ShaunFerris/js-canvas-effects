@@ -15,7 +15,7 @@ function setupCanvas() {
     let termy = window.innerHeight;
     canvas.width = termx;
     canvas.height = termy;
-    return {ctx, termx, termy};
+    return {canvas, ctx, termx, termy};
 }
 
 class canvasLightning {
@@ -23,7 +23,8 @@ class canvasLightning {
     Class to contain animation functions and properties. Initialized
     with the canvas properties from setupCanvas().
     */
-    constructor({ctx, termx, termy}) {
+    constructor({canvas, ctx, termx, termy}) {
+        this.canvas = canvas;
         this.ctx = ctx;
         this.termx = termx;
         this.termy = termy;
@@ -31,6 +32,8 @@ class canvasLightning {
         this.lightning = [];
         this.currLightTime = 0;
         this.totalLightTime = 50;
+
+        this.loop();
     }
 
     /*
@@ -90,7 +93,7 @@ class canvasLightning {
             light.path.push({
                 x: light.path[light.path.length-1].x +
                     this.rand(0, light.xrange/2),
-                y: light.path[light.path.length-1] +
+                y: light.path[light.path.length-1].y +
                     this.rand(0, light.yrange)
             });
 
@@ -114,7 +117,7 @@ class canvasLightning {
         while(i--) {
             let light = this.lightning[i];
             this.ctx.strokeStyle = 
-                `hsla(0, 100%, 100%, (${this.rand(10, 100)/100})`;
+                `hsla(0, 100%, 100%, ${this.rand(10, 100)/100}`;
             this.ctx.lineWidth = 1;
 
             for (let i = 30; i < 151; i += 30) {
@@ -165,8 +168,8 @@ class canvasLightning {
         */
         this.currLightTime++;
         if (this.currLightTime >= this.totalLightTime) {
-            let newx = this.rand(100, termx - 100);
-            let newy = this.rand(0, termy / 2);
+            let newx = this.rand(100, this.termx - 100);
+            let newy = this.rand(0, this.termy / 2);
             let createCount = this.rand(1, 3);
             while (createCount--) {
                 this.createBolt(newx, newy, true);
@@ -177,11 +180,27 @@ class canvasLightning {
     }
 
     clearCanvas() {
-        
+        /*
+        Function to clear any renderings off of the canvas
+        */
+        this.ctx.globalCompositeOperation = 'destination-out';
+        this.ctx.fillStyle = `rgba(0, 0, 0, ${this.rand(1, 30)/100})`;
+        this.ctx.fillRect(0, 0, this.termx, this.termy);
+        this.ctx.globalCompositeOperation = 'source-over';
+    }
+
+    loop() {
+        let _this = this;
+        function innerLoop() {
+            requestAnimationFrame(innerLoop, _this.canvas);
+            _this.clearCanvas();
+            _this.updateBolt();
+            _this.boltTimer();
+            _this.renderBolt();
+        }
+        innerLoop();
     }
 }
 
-canvas = setupCanvas();
-console.log(canvas);
-const testCan = new canvasLightning(canvas);
-console.log(testCan.termx);
+const can = setupCanvas();
+const renderer = new canvasLightning(can);
