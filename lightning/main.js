@@ -96,6 +96,14 @@ class canvasLightning {
     }
 
     renderBolt() {
+        /*
+        Function to render the generated bolt objects with randomly
+        generated forks.
+
+        Loops through the lightning instance variable in reverse.
+        For each bolt object in the lightning array, set the line
+        width and stroke style, then begin to plot the path.
+        */
         let i = this.lightning.length;
         while(i--) {
             let light = this.lightning[i];
@@ -123,9 +131,23 @@ class canvasLightning {
                 }
             }
             if (!light.hasFired) {
-                
+                this.ctx.fillStyle = (
+                    `rgba(255, 255, 255, ${this.rand(4, 12)/100})`
+                );
+                this.ctx.fillRect(0, 0, this.termx, this.termy);
             }
+            if (this.rand(0, 30) === 0) {
+                this.ctx.fillStyle = (
+                    `rgba(255, 255, 255, ${this.rand(1, 3)/100})`
+                );
+                this.ctx.fillRect(0, 0, this.termx, this.termy);
+            }
+            this.ctx.stroke();
         }
+    }
+
+    boltTimer() {
+
     }
 }
 
