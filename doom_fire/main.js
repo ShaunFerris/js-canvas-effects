@@ -146,7 +146,11 @@ class DoomFire {
     }
 
     createFireSource() {
-        //TBC
+        for (let col = 0; col <= this.termx; col++) {
+            const overflowPixelIndex = this.termx * this.termy;
+            const pixelIndex = (overflowPixelIndex - this.termx) + col;
+            this.firePixels[pixelIndex] = 36;
+        }
     }
 
     destroyFireSource() {
