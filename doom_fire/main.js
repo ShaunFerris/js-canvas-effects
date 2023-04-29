@@ -69,7 +69,24 @@ class DoomFire {
         //Add the start or animation function call here once complete
     }
 
+    animate() {
+        /*
+        Begin image generation. 
+        Unlike the other canvas animations in this directory, this 
+        example uses the image and putImageData features to constantly
+        update a displayed image rather than a requestAnimationFrame loop.
+        */
+        this.createFireData();
+        this.createFireSource();
+
+        setInterval(this.calcFirePropagation, 50);
+    }
+
     createFireData() {
+        /*
+        Updates the instance variable firePixels with one item per unit
+        of the canvas area. The array entries are initialized to 0.
+        */
         const nPixels = this.termx * this.termy;
         for (let i = 0; i < nPixels; i++) {
             this.firePixels[i] = 0;
@@ -77,6 +94,10 @@ class DoomFire {
     }
 
     updatePixelIntensity(currPixelInd) {
+        /*
+        Updates the intensity of one random pixel represented in the
+        firePixels array.
+        */
         const belowPixelIndex = currPixelInd + this.termx;
         if (belowPixelIndex >= this.termx * this.termy) {
             return;
@@ -91,6 +112,12 @@ class DoomFire {
     }
 
     renderFire() {
+        /*
+        Update every pixel in the firePixels array with a new color from
+        the firePixels array, then push this to the context image data, 
+        and finally call the ctx.putImageData() function to update the
+        onscreen render.
+        */
         for ( let pixelIndex = 0;
             pixelIndex < this.firePixels.length;
             pixelIndex++) {
@@ -106,6 +133,9 @@ class DoomFire {
     }
 
     calcFirePropagation() {
+        /*
+        Loop through and update the intensity of pixels in a pattern.
+        */
         for (let col = 0; col < this.termx; col++) {
             for (let row = 0; row < this.termy; row++) {
                 const pixelIndex = col + this.termx * row;
@@ -118,5 +148,19 @@ class DoomFire {
     createFireSource() {
         //TBC
     }
+
+    destroyFireSource() {
+        //TBC
+    }
+
+    increaseFireSource() {
+        //TBC
+    }
+
+    decreaseFireSource() {
+        //TBC
+    }
+
+
 
 }
