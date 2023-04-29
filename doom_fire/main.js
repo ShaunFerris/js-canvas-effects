@@ -76,18 +76,39 @@ class DoomFire {
         }
     }
 
-    updatePixelIntensity() {
-        //TBC
+    updatePixelIntensity(currPixelInd) {
+        const belowPixelIndex = currPixelInd + this.termx;
+        if (belowPixelIndex >= this.termx * this.termy) {
+            return;
+        }
+        const decay = Math.floor(Math.random() * 3);
+        const belowPixelFireIntensity = this.firePixels[belowPixelIndex];
+        const newIntensity = 
+            belowPixelFireIntensity - decay >= 0 ? 
+                belowPixelFireIntensity - decay :
+                0;
+        this.firePixels[currPixelInd - decay] = newIntensity;
     }
 
     renderFire() {
-        //TBC
+        for ( let pixelIndex = 0;
+            pixelIndex < this.firePixels.length;
+            pixelIndex++) {
+                const fireIntensity = this.firePixels[pixelIndex];
+                const color = this.palette[fireIntensity];
+                //Consider using a destructuring assignment here
+                this.image.data[pixelIndex * 4] = color.r;
+                this.image.data[pixelIndex * 4 + 1] = color.g;
+                this.image.data[pixelIndex * 4 + 2] = color.b;
+                this.image.data[pixelIndex * 4 + 3] = 255;
+        }
+        this.ctx.putImageData(image, 0, 0);
     }
 
     calcFirePropagation() {
         for (let col = 0; col < this.termx; col++) {
             for (let row = 0; row < this.termy; row++) {
-                const pixelIndex = col + termx * row;
+                const pixelIndex = col + this.termx * row;
                 this.updatePixelIntensity(pixelIndex);
             }
         }
