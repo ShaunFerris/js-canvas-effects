@@ -95,8 +95,8 @@ class DoomFire {
 
     updatePixelIntensity(currPixelInd) {
         /*
-        Updates the intensity of one random pixel represented in the
-        firePixels array.
+        Updates the intensity of one pixel represented in the firePixels 
+        array.
         */
         const belowPixelIndex = currPixelInd + this.termx;
         if (belowPixelIndex >= this.termx * this.termy) {
@@ -146,6 +146,11 @@ class DoomFire {
     }
 
     createFireSource() {
+        /*
+        Sets the lowest row of pixels int the firePixels array to an 
+        intesity level of 36, allowing for the propogation function to
+        move the fire upscreen until the decay factor puts it out.
+        */
         for (let col = 0; col <= this.termx; col++) {
             const overflowPixelIndex = this.termx * this.termy;
             const pixelIndex = (overflowPixelIndex - this.termx) + col;
