@@ -5,7 +5,7 @@ Feature complete:
 
     - bubble_bounce
     - lightning
+    - fractal_tree
+    - doom_fire
 
 Under development:
-
-    - fractal_tree
