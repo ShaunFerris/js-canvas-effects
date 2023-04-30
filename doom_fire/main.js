@@ -66,7 +66,7 @@ class DoomFire {
             {"r":223,"g":223,"b":159}, {"r":239,"g":239,"b":199},
             {"r":255,"g":255,"b":255}
         ];
-        //Add the start or animation function call here once complete
+        this.animate();
     }
 
     animate() {
@@ -79,7 +79,7 @@ class DoomFire {
         this.createFireData();
         this.createFireSource();
 
-        setInterval(this.calcFirePropagation, 50);
+        setInterval(() => this.calcFirePropagation(), 50);
     }
 
     createFireData() {
@@ -129,7 +129,7 @@ class DoomFire {
                 this.image.data[pixelIndex * 4 + 2] = color.b;
                 this.image.data[pixelIndex * 4 + 3] = 255;
         }
-        this.ctx.putImageData(image, 0, 0);
+        this.ctx.putImageData(this.image, 0, 0);
     }
 
     calcFirePropagation() {
@@ -142,7 +142,7 @@ class DoomFire {
                 this.updatePixelIntensity(pixelIndex);
             }
         }
-        renderFire();
+        this.renderFire();
     }
 
     createFireSource() {
@@ -154,7 +154,11 @@ class DoomFire {
     }
 
     destroyFireSource() {
-        //TBC
+        for (let col = 0; col <= this.termx; col++) {
+            const overflowPixelIndex = this.termx * this.termy;
+            const pixelIndex = (overflowPixelIndex - this.termx) + col;
+            this.firePixels[pixelIndex] = 0;
+        }
     }
 
     increaseFireSource() {
@@ -168,3 +172,6 @@ class DoomFire {
 
 
 }
+
+const can = setupCanvas();
+const fire = new DoomFire(can);
