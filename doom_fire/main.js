@@ -12,8 +12,8 @@ function setupCanvas() {
     */
     const canvas = document.getElementById('myCanvas');
     const ctx = canvas.getContext('2d');
-    let termx = window.innerWidth;
-    let termy = window.innerHeight;
+    let termx = 120 //window.innerWidth;
+    let termy = 80 //window.innerHeight;
     canvas.width = termx;
     canvas.height = termy;
     return {canvas, ctx, termx, termy};
