@@ -167,7 +167,20 @@ class DoomFire {
     }
 
     increaseFireSource() {
-        //TBC
+        for (let col = 0; col <= this.termx; col++) {
+            const overflowPixelIndex = this.termx * this.termy;
+            const pixelIndex = (overflowPixelIndex - this.termx) + col;
+            const currentFireIntensity = this.firePixels[pixelIndex]
+
+            if (currentFireIntensity < 36) {
+                const increase = Math.floor(Math.random() * 14);
+                const newFireIntensity =
+                    currentFireIntensity + increase >= 36 ?
+                        36:
+                        currentFireIntensity + increase;
+                this.firePixels[pixelIndex] = newFireIntensity;
+            }
+        }
     }
 
     decreaseFireSource() {
