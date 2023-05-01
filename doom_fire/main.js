@@ -159,6 +159,12 @@ class DoomFire {
     }
 
     destroyFireSource() {
+        /*
+        Identifies the lowest row of firepixels, which behave as the 
+        source for all other fire pixels on screen, and sets their
+        intesity in the firePixels instance variable to 0, extinguishing
+        the fire.
+        */
         for (let col = 0; col <= this.termx; col++) {
             const overflowPixelIndex = this.termx * this.termy;
             const pixelIndex = (overflowPixelIndex - this.termx) + col;
@@ -167,6 +173,12 @@ class DoomFire {
     }
 
     increaseFireSource() {
+        /*
+        Loops over the source pixels in the firePixels array in the same
+        way as the destroy firesource function above. Generates a random
+        value to increase their intesity by and does so if this would
+        not put intensity over 36, otherwise sets intensity to 36.
+        */
         for (let col = 0; col <= this.termx; col++) {
             const overflowPixelIndex = this.termx * this.termy;
             const pixelIndex = (overflowPixelIndex - this.termx) + col;
