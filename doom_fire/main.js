@@ -108,6 +108,8 @@ class DoomFire {
             belowPixelFireIntensity - decay >= 0 ? 
                 belowPixelFireIntensity - decay :
                 0;
+        // add the decay to make the wind direction to the right
+        //add a 50/50 condition for random wind
         this.firePixels[currPixelInd - decay] = newIntensity;
     }
 
