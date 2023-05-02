@@ -196,7 +196,26 @@ class DoomFire {
     }
 
     decreaseFireSource() {
-        //TBC
+        /*
+        Loops over the source pixels in the firePixels array in the same
+        way as the destroy firesource function above. Generates a random
+        value to decay their intesity by and does so if this would
+        not put intensity below 0, otherwise sets intensity to 0.
+        */
+        for (let col = 0; col <= this.termx; col++) {
+            const overflowPixelIndex = this.termx * this.termy;
+            const pixelIndex = (overflowPixelIndex - this.termx) + col;
+            const currentFireIntensity = this.firePixels[pixelIndex];
+
+            if (currentFireIntensity > 0) {
+                const decay = Math.floor(Math.random() * 14);
+                const newFireIntensity =
+                currentFireIntensity - decay >= 0 ?
+                    currentFireIntensity - decay :
+                    0;
+                this.firePixels[pixelIndex] = newFireIntensity;
+            }
+        }
     }
 
 
