@@ -34,17 +34,6 @@ class DoomFire {
 
         //Initialize the fire class instance variables
         this.firePixels = [];
-        /*
-        GPT suggestion for a more concise way of setting the palette
-        dictionary. *I haven't properly examined yet, might be fuckedup*:
-        this.palette = Array.from({ length: 256 }, (_, i) => {
-            const level = i < 48 ? 0 : Math.floor((i - 47) / 8);
-            const r = Math.floor((8 - level) * 32.5);
-            const g = Math.floor((16 - level * 2) * 20.375);
-            const b = Math.floor((8 - level) * 32.5);
-            return { r, g, b };
-        });
-        */
         this.palette = [
             {"r":7,"g":7,"b":7}, {"r":31,"g":7,"b":7},
             {"r":47,"g":15,"b":7}, {"r":71,"g":15,"b":7},
@@ -66,7 +55,19 @@ class DoomFire {
             {"r":223,"g":223,"b":159}, {"r":239,"g":239,"b":199},
             {"r":255,"g":255,"b":255}
         ];
+
+        //Start main animation loop
         this.animate();
+        
+        //Initialize listeners for interaction
+        this.canvas.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+            if (e.button === 0) {
+                this.increaseFireSource();
+            } else if (e.button === 2) {
+                this.decreaseFireSource();
+            }
+        });
     }
 
     animate() {
