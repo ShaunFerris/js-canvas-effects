@@ -58,8 +58,12 @@ class DoomFire {
 
         //Start main animation loop
         this.animate();
-        
+
         //Initialize listeners for interaction
+        this.canvas.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+          });          
+
         this.canvas.addEventListener('mousedown', (e) => {
             e.preventDefault();
             if (e.button === 0) {
